@@ -9,8 +9,9 @@ class Counter extends React.Component {
         
         return (
             <>
-                number:{this.props.number}
+                <p>{this.props.number}</p>
                 <button onClick={this.props.increment}>+</button>
+                <button onClick={this.props.asyncIncrement}>一秒后+1</button>
             </>
         );
     }
