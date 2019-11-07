@@ -14,12 +14,13 @@ function* login(username, password) {
         put({ type: types.LOGIN_ERROR, error })
     }
 }
-
+    
 export default function* loginSaga() {
     // 始终监听登录退出事件
     while (true) {
 
         // 通过take监听一个动作，可以将这个动作对应的action作为返回值返回
+        // take是在等待一个动作
         let { payload: { username, password } } = yield take(types.LOGIN_REQUEST);
         // 获取到参数之后，调用接口
         // call可以调一个返回promise的方法，也可以调用一个saga
