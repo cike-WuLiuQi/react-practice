@@ -17,6 +17,10 @@ module.exports = {
         }
     },
     resolve: {
+        alias: {
+            "~": path.resolve(__dirname, 'node_modules'),
+            "@": path.resolve(__dirname)
+        },
         extensions: [".ts", ".tsx", ".js", ".json"]
     },
 
@@ -24,12 +28,22 @@ module.exports = {
         rules: [{
             test: /\.(j|t)sx?$/,
             loader: "ts-loader",
-            exclude: /node_modules/ 
+            exclude: /node_modules/
         },
         {
             enforce: "pre",
             test: /\.tsx?$/,
             loader: "source-map-loader"
+        },
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader']
+        }, {
+            test: /\.less$/,
+            use: ['style-loader', 'css-loader', 'less-loader']
+        }, {
+            test: /\.(gif|svg|png|jpg|jpeg)$/,
+            use: ['url-loader']
         }
         ]
     },
