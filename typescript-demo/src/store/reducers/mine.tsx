@@ -1,11 +1,11 @@
 import { TypeAction } from "../../typings/common";
-export interface TypeHome {
+export interface TypeMine {
 
 }
 let initialState = {
 
 }
-export default (state: TypeHome = initialState, action: TypeAction) => {
+export default (state: TypeMine = initialState, action: TypeAction) => {
     switch (action.type) {
 
         default:

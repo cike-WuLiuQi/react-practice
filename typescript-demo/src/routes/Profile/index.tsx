@@ -1,10 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import actions from "../../store/actions/home"
+import actions from "../../store/actions/profile"
 import { TypeRootState } from "../../store/reducers";
-import { TypeHome } from '../../store/reducers/home';
-import './index.less';
+import { TypeProfile } from '../../store/reducers/profile';
 
 type StateProps = ReturnType<typeof mapStateToProps>
 type DispatchProps = typeof actions;
@@ -15,24 +14,24 @@ type RouteProps = RouteComponentProps<IParams>
 type Props = StateProps & DispatchProps & RouteProps & {
     children?: any
 }
-export interface HomeProps {
+export interface ProfileProps {
 
 }
 
-export interface HomeState {
+export interface ProfileState {
 
 }
 
-class Home extends React.Component<Props, HomeState> {
+class Profile extends React.Component<ProfileProps, ProfileState> {
+    state = { : }
     render() {
-        
         return (
             <div>
-                home
+                Profile
             </div>
         );
     }
 }
-const mapStateToProps = (state: TypeRootState): TypeHome => state.home;
+const mapStateToProps = (state: TypeRootState): TypeProfile => state.home;
 
-export default connect(mapStateToProps, actions)(Home);
+export default connect(mapStateToProps, actions)(Profile);
