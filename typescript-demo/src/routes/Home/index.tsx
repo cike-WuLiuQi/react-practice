@@ -1,36 +1,29 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
-import actions from "../../store/actions/home"
+import actions from "../../store/actions/home";
 import { TypeRootState } from "../../store/reducers";
-import { TypeHome } from '../../store/reducers/home';
-import './index.less';
+import { TypeHome } from "../../store/reducers/home";
+import "./index.less";
+import HomeHeader from "./HomeHeader";
 
-type StateProps = ReturnType<typeof mapStateToProps>
+type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof actions;
-interface IParams {
+interface IParams {}
+type RouteProps = RouteComponentProps<IParams>;
+type Props = StateProps &
+  DispatchProps &
+  RouteProps & {
+    children?: any;
+  };
+export interface HomeProps {}
 
-}
-type RouteProps = RouteComponentProps<IParams>
-type Props = StateProps & DispatchProps & RouteProps & {
-    children?: any
-}
-export interface HomeProps {
-
-}
-
-export interface HomeState {
-
-}
+export interface HomeState {}
 
 class Home extends React.Component<Props, HomeState> {
-    render() {
-        return (
-            <div>
-                home
-            </div>
-        );
-    }
+  render() {
+    return <HomeHeader setcurrentCategory={this.props.setcurrentCategory} />;
+  }
 }
 const mapStateToProps = (state: TypeRootState): TypeHome => state.home;
 
