@@ -32,16 +32,18 @@ module.exports = {
         },
         {
             enforce: "pre",
-            test: /\.tsx?$/,
+            test: /\.js$/,
             loader: "source-map-loader"
         },
         {
             test: /\.css$/,
             use: ['style-loader', 'css-loader']
-        }, {
+        },
+        {
             test: /\.less$/,
             use: ['style-loader', 'css-loader', 'less-loader']
-        }, {
+        },
+        {
             test: /\.(gif|svg|png|jpg|jpeg)$/,
             use: ['url-loader']
         }

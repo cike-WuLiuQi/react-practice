@@ -22,8 +22,8 @@ export interface ProfileState {
 
 }
 
-class Profile extends React.Component<ProfileProps, ProfileState> {
-    state = { : }
+class Profile extends React.Component<Props, ProfileState> {
+    // state = { : }
     render() {
         return (
             <div>
@@ -32,6 +32,6 @@ class Profile extends React.Component<ProfileProps, ProfileState> {
         );
     }
 }
-const mapStateToProps = (state: TypeRootState): TypeProfile => state.home;
+const mapStateToProps = (state: TypeRootState): TypeProfile => state.profile;
 
 export default connect(mapStateToProps, actions)(Profile);

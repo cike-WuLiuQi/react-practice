@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
-import {connectRouter } from "connected-react-router";
+import { connectRouter } from "connected-react-router";
 import home from './home';
 import mine from './mine';
 import profile from './profile';
@@ -9,7 +9,7 @@ let reducers = {
     home,
     mine,
     profile,
-    history: connectRouter(history)
+    router: connectRouter(history)
 }
 
 export type TypeRootState = {

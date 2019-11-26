@@ -14,24 +14,24 @@ type RouteProps = RouteComponentProps<IParams>
 type Props = StateProps & DispatchProps & RouteProps & {
     children?: any
 }
-export interface HomeProps {
+export interface MineProps {
 
 }
 
-export interface HomeState {
+export interface MineState {
 
 }
 
-class Mine extends React.Component<HomeProps, HomeState> {
-    state = { : }
+class Mine extends React.Component<Props, MineState> {
+    // state = { : }
     render() {
         return (
             <div>
-                home
+                Mine
             </div>
         );
     }
 }
-const mapStateToProps = (state: TypeRootState): TypeMine => state.home;
+const mapStateToProps = (state: TypeRootState): TypeMine => state.mine;
 
 export default connect(mapStateToProps, actions)(Mine);

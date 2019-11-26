@@ -25,7 +25,6 @@ export interface HomeState {
 
 class Home extends React.Component<Props, HomeState> {
     render() {
-        
         return (
             <div>
                 home
