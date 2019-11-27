@@ -24,10 +24,11 @@ const transitionStyles: TypeTransitionStyles = {
   entered: { opacity: 1, display: "block" },
   exiting: { opacity: 0, display: "none" },
   exited: { opacity: 0, display: "none" },
-  unmounted: { opacity: 0, display: "none" },
+  unmounted: { opacity: 0, display: "none" }
 };
 export interface HomeHeaderProps {
-  setcurrentCategory: any
+  setCurrentCategory: any;
+  currentCategory: string;
 }
 
 export interface HomeHeaderState {
@@ -36,12 +37,22 @@ export interface HomeHeaderState {
 
 class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
   state = { in: false };
+
+  setCategory = (event: React.MouseEvent<HTMLUListElement>) => {
+    let target: EventTarget = event.target;
+    let type = (target as HTMLUListElement).dataset.type;
+    this.props.setCurrentCategory(type);
+    this.setState({in : false})
+  };
   render() {
     return (
       <div className="home-header">
         <div className="header-logo">
           <img src="http://img.zhufengpeixun.cn/zfkelogo.png" alt="" />
-          <Icon type="bars" />
+          <Icon
+            type="bars"
+            onClick={() => this.setState({ in: !this.state.in })}
+          />
         </div>
         <Transition in={this.state.in} timeout={duration}>
           {state => (
@@ -51,11 +62,11 @@ class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
                 ...transitionStyles[state]
               }}
               className="category"
-              onClick={this.props.setcurrentCategory}
+              onClick={this.setCategory}
             >
-              <li data-type="all">全部</li>
-              <li data-type="react">react</li>
-              <li data-type="vue">vue</li>
+              <li data-type="all" className={this.props.currentCategory === 'all' ? 'active' : ''}>全部</li>
+              <li data-type="react" className={this.props.currentCategory === 'react' ? 'active' : ''}>react</li>
+              <li data-type="vue" className={this.props.currentCategory === 'vue' ? 'active' : ''}>vue</li>
             </ul>
           )}
         </Transition>

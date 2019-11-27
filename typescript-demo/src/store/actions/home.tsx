@@ -1,7 +1,7 @@
 import { TypeAction } from "../../typings/common";
-
+import * as types from "../action-types";
 export default {
-  setcurrentCategory(payload: string): TypeAction {
-    return { type: "123", payload };
+  setCurrentCategory(payload: string): TypeAction {
+    return { type: types.SET_CURRENT_CATEGORY, payload };
   }
 };

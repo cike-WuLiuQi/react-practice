@@ -15,6 +15,8 @@ type Props = StateProps &
   DispatchProps &
   RouteProps & {
     children?: any;
+    currentCategory: string;
+    setCurrentCategory: any;
   };
 export interface HomeProps {}
 
@@ -22,7 +24,7 @@ export interface HomeState {}
 
 class Home extends React.Component<Props, HomeState> {
   render() {
-    return <HomeHeader setcurrentCategory={this.props.setcurrentCategory} />;
+    return <HomeHeader setCurrentCategory={this.props.setCurrentCategory} currentCategory={this.props.currentCategory} />;
   }
 }
 const mapStateToProps = (state: TypeRootState): TypeHome => state.home;
