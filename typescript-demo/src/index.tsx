@@ -10,6 +10,8 @@ import Profile from "./routes/Profile";
 import "./assets/common.less";
 import history from "./store/history";
 import Tabs from "./components/Tabs";
+import Register from "./routes/Register";
+import Login from "./routes/Login";
 
 ReactDom.render(
   <Provider store={store}>
@@ -19,6 +21,8 @@ ReactDom.render(
           <Route path="/" exact component={Home} />
           <Route path="/mine" component={Mine} />
           <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
           <Redirect to="/" />
         </Switch>
         <Tabs />
