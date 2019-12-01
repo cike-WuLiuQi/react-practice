@@ -7,7 +7,7 @@ import { TypeRootState } from "../../store/reducers";
 import { TypeProfile } from "../../store/reducers/profile";
 import NavHeader from "../../components/NavHeader";
 import "./index.less";
-import history from "../../store/history";
+import LOGIN_TYPES from '../../typings/login-types'
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof actions;
@@ -25,11 +25,17 @@ export interface ProfileState {}
 class Profile extends React.Component<Props, ProfileState> {
   // state = { : }
 
+  async componentDidMount() {
+    if (this.props.loginState === LOGIN_TYPES.UN_VALIDATE) {
+      await this.props.validate()
+    }
+  }
+
   render() {
     let content = null;
-    if (/*检测当前用户是否登录*/ false) {
+    if (this.props.loginState === LOGIN_TYPES.UN_VALIDATE) {
       content = null;
-    } else if (/*当前用户已经登录*/ false) {
+    } else if (this.props.loginState === LOGIN_TYPES.LOGINED) {
       content = (
         <>
           <Descriptions>
