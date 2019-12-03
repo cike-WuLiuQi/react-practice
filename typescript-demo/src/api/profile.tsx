@@ -10,3 +10,6 @@ export function register(values: any) {
 export function login(values: any) {
     return axios.post('/login', values)
 }
+export function logout() {
+    return axios.get('/logout')
+}

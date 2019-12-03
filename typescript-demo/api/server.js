@@ -46,9 +46,10 @@ app.post('/uploadAvatar', upload.single('avatar'), async function (req, res, nex
     let { userId } = req.body;
     let avatar = `${req.protocol}://${req.headers.host}/${req.file.filename}`;
     await UserModel.updateOne({ _id: userId }, { avatar });
-    setTimeout(() => {
-        res.send({ code: 0, data: avatar });
-    }, 3000);
+    if (req.session.user) {
+        req.session.user.avatar = avatar;
+    }
+    res.send({ code: 0, data: avatar });
 })
 app.post('/register', async (req, res) => {
     let user = req.body;//username password email phone avatar
@@ -86,7 +87,7 @@ app.get('/sliders', async function (req, res) {
 });
 app.get('/getlesson', async function (req, res) {
     let { id } = req.query;
-    let lessons = await LessonModel.findById(id);
+    let lessons = await LessonModel.find();
     res.json({ code: 0, data: lessons });
 });
 // http://getLessons/vue?offset=0&limit=5
@@ -105,4 +106,4 @@ app.get('/getLessons/:category', async function (req, res) {
         res.json({ code: 0, data: { list, hasMore: total > offset + limit } });
     }, 1000);
 });
-app.listen(8000);
+app.listen(9000);
