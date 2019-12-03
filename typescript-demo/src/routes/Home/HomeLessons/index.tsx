@@ -19,7 +19,7 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
   }
   render() {
     return (
-      <div className='home-lesson'>
+      <div className="home-lesson">
         <h2>
           <Icon type="bars" />
           <span>全部课程</span>
@@ -28,9 +28,9 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
           <Card
             hoverable
             // style={{ width: 100% }}
-            cover={<img alt={lesson.title} src={lesson.url} />}
+            cover={<img src={lesson.url} />}
           >
-            <Meta title={lesson.title} description={lesson.price} />
+            <Meta title={lesson.title} description={`价格：${lesson.price}`} />
           </Card>
         ))}
       </div>
