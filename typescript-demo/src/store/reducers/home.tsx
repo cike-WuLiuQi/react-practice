@@ -15,14 +15,28 @@ export interface Lesson {
   price: string,//价格
   category: string,//分类
 }
+
+export interface Lessons {
+  limit: number;
+  offset: number;
+  list: Array<Lesson>
+  hasMore: boolean
+  loading: boolean
+}
 export interface TypeHome {
   sliders: Array<Slider>;
-  lessons: Array<Lesson>;
+  lessons: Lessons;
   currentCategory: String;
 }
 let initialState: TypeHome = {
   sliders: [],
-  lessons: [],
+  lessons: {
+    limit: 5,
+    offset: 0,
+    list: [],
+    hasMore: true,
+    loading: false
+  },
   currentCategory: "all"
 };
 export default (
@@ -38,6 +52,21 @@ export default (
 
     case types.GET_LESSONS:
       return { ...state, lessons: action.payload.data };
+
+    case types.SET_LOADING:
+      return { ...state, lessons: { ...state.lessons, loading: action.payload } };
+
+    case types.SET_LESSONS:
+      return {
+        ...state, lessons:
+        {
+          ...state.lessons,
+          ...action.payload,
+          offset: state.lessons.offset + action.payload.list.length,
+          loading: false,
+        }
+      };
+
     default:
       return state;
   }

@@ -87,9 +87,9 @@ app.get('/sliders', async function (req, res) {
 });
 app.get('/getlesson', async function (req, res) {
     let { id } = req.query;
-    let lessons = await LessonModel.find();
+    let lessons = await LessonModel.findById(id);
     res.json({ code: 0, data: lessons });
-});
+  });
 // http://getLessons/vue?offset=0&limit=5
 app.get('/getLessons/:category', async function (req, res) {
     let category = req.params.category;
