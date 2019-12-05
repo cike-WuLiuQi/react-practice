@@ -10,13 +10,34 @@ export default {
     return { type: types.GET_SLIDERS, payload: getSliders() };
   },
   getLessons(): TypeThunkFunction {
-    return async function (dispatch: Dispatch, getState: Store['getState']) {
-      dispatch({ type: types.SET_LOADING, payload: true })
-      const { currentCategory, lessons: { hasMore, limit, offset, list } } = getState().home;
-      let lessons: any = await getLessons(currentCategory, offset, limit)
-      console.log('lessons', lessons);
+    return async function(dispatch: Dispatch, getState: Store["getState"]) {
+      const {
+        currentCategory,
+        lessons: { limit, offset, loading }
+      } = getState().home;
+      if (!loading) {
+        dispatch({ type: types.SET_LOADING, payload: true });
 
-      dispatch({ type: types.SET_LESSONS, payload: lessons.data })
-    }
+        let lessons: any = await getLessons(currentCategory, offset, limit);
+        console.log("lessons", lessons);
+
+        dispatch({ type: types.SET_LESSONS, payload: lessons.data });
+      }
+    };
   },
+  refreshLessons(): TypeThunkFunction {
+    return async function(dispatch: Dispatch, getState: Store["getState"]) {
+      const {
+        currentCategory,
+        lessons: { limit, loading }
+      } = getState().home;
+      if (!loading) {
+        dispatch({ type: types.SET_LOADING, payload: true });
+
+        let lessons: any = await getLessons(currentCategory, 0, limit);
+
+        dispatch({ type: types.REFRESH_LESSONS, payload: lessons.data });
+      }
+    };
+  }
 };

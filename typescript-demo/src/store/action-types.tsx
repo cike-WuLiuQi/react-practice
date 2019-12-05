@@ -10,3 +10,4 @@ export const GET_SLIDERS = 'GET_SLIDERS';
 export const GET_LESSONS = 'GET_LESSONS';
 export const SET_LESSONS = 'SET_LESSONS';
 export const SET_LOADING = 'SET_LOADING';
+export const REFRESH_LESSONS = 'REFRESH_LESSONS';

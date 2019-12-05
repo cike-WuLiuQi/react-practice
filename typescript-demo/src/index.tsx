@@ -12,6 +12,7 @@ import history from "./store/history";
 import Tabs from "./components/Tabs";
 import Register from "./routes/Register";
 import Login from "./routes/Login";
+import Detail from "./routes/Detail";
 
 ReactDom.render(
   <Provider store={store}>
@@ -23,6 +24,7 @@ ReactDom.render(
           <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/detail/:id" component={Detail} />
           <Redirect to="/" />
         </Switch>
         <Tabs />

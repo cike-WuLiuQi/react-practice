@@ -1,7 +1,8 @@
 import * as React from "react";
-import { Card, Icon, Button, Skeleton } from 'antd';
+import { Card, Icon, Button, Skeleton } from "antd";
 import "./index.less";
 import { Lesson, Lessons } from "../../../store/reducers/home";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 export interface HomeLessonsProps {
@@ -9,7 +10,7 @@ export interface HomeLessonsProps {
   lessons: Lessons;
 }
 
-export interface HomeLessonsState { }
+export interface HomeLessonsState {}
 
 class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
   // state = { :  }
@@ -25,21 +26,38 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
           <Icon type="bars" />
           <span>全部课程</span>
         </h2>
-        <Skeleton loading={this.props.lessons.loading} paragraph={{ rows: 8 }} >
+        <Skeleton
+          loading={
+            this.props.lessons.list.length == 0 && this.props.lessons.loading
+          }
+          paragraph={{ rows: 8 }}
+        >
           {this.props.lessons.list.map((lesson: Lesson) => (
-            <Card
-              hoverable
-              // style={{ width: 100% }}
-              cover={<img src={lesson.url} />}
-            >
-              <Meta title={lesson.title} description={`价格：${lesson.price}`} />
-            </Card>
+            <Link key={lesson._id} to={{ pathname: `/detail/${lesson._id}`, state: lesson }}>
+              <Card
+                hoverable
+                // style={{ width: 100% }}
+                cover={<img src={lesson.url} />}
+              >
+                <Meta
+                  title={lesson.title}
+                  description={`价格：${lesson.price}`}
+                />
+              </Card>
+            </Link>
           ))}
-          {this.props.lessons.hasMore ? <Button style={{ width: '100%' }} loading={this.props.lessons.loading} onClick={() => this.props.getLessons()}>加载更多</Button> :
-            <p style={{ width: '100%', textAlign: 'center' }}>到底了</p>}
+          {this.props.lessons.hasMore ? (
+            <Button
+              style={{ width: "100%" }}
+              loading={this.props.lessons.loading}
+              onClick={() => this.props.getLessons()}
+            >
+              加载更多
+            </Button>
+          ) : (
+            <p style={{ width: "100%", textAlign: "center" }}>到底了</p>
+          )}
         </Skeleton>
-
-
       </div>
     );
   }

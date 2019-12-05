@@ -29,6 +29,7 @@ const transitionStyles: TypeTransitionStyles = {
 export interface HomeHeaderProps {
   setCurrentCategory: any;
   currentCategory: string;
+  refreshLessons: any;
 }
 
 export interface HomeHeaderState {
@@ -41,8 +42,11 @@ class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
   setCategory = (event: React.MouseEvent<HTMLUListElement>) => {
     let target: EventTarget = event.target;
     let type = (target as HTMLUListElement).dataset.type;
-    this.props.setCurrentCategory(type);
-    this.setState({in : false})
+
+    this.setState({ in: false }, () => {
+      this.props.setCurrentCategory(type);
+      this.props.refreshLessons();
+    });
   };
   render() {
     return (
@@ -64,9 +68,26 @@ class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
               className="category"
               onClick={this.setCategory}
             >
-              <li data-type="all" className={this.props.currentCategory === 'all' ? 'active' : ''}>全部</li>
-              <li data-type="react" className={this.props.currentCategory === 'react' ? 'active' : ''}>react</li>
-              <li data-type="vue" className={this.props.currentCategory === 'vue' ? 'active' : ''}>vue</li>
+              <li
+                data-type="all"
+                className={this.props.currentCategory === "all" ? "active" : ""}
+              >
+                全部
+              </li>
+              <li
+                data-type="react"
+                className={
+                  this.props.currentCategory === "react" ? "active" : ""
+                }
+              >
+                react
+              </li>
+              <li
+                data-type="vue"
+                className={this.props.currentCategory === "vue" ? "active" : ""}
+              >
+                vue
+              </li>
             </ul>
           )}
         </Transition>

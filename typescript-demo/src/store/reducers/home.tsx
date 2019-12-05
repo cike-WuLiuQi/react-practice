@@ -7,21 +7,21 @@ export interface Slider {
 }
 export interface Lesson {
   _id: string;
-  order: number,//顺序
-  title: string,//标题
-  video: string,//视频
-  poster: string, //海报
-  url: string,//url地址
-  price: string,//价格
-  category: string,//分类
+  order: number; //顺序
+  title: string; //标题
+  video: string; //视频
+  poster: string; //海报
+  url: string; //url地址
+  price: string; //价格
+  category: string; //分类
 }
 
 export interface Lessons {
   limit: number;
   offset: number;
-  list: Array<Lesson>
-  hasMore: boolean
-  loading: boolean
+  list: Array<Lesson>;
+  hasMore: boolean;
+  loading: boolean;
 }
 export interface TypeHome {
   sliders: Array<Slider>;
@@ -54,16 +54,32 @@ export default (
       return { ...state, lessons: action.payload.data };
 
     case types.SET_LOADING:
-      return { ...state, lessons: { ...state.lessons, loading: action.payload } };
+      return {
+        ...state,
+        lessons: { ...state.lessons, loading: action.payload }
+      };
 
     case types.SET_LESSONS:
       return {
-        ...state, lessons:
-        {
+        ...state,
+        lessons: {
           ...state.lessons,
-          ...action.payload,
+          list: [...state.lessons.list, ...action.payload.list],
+          hasMore: action.payload.hasMore,
           offset: state.lessons.offset + action.payload.list.length,
-          loading: false,
+          loading: false
+        }
+      };
+
+    case types.REFRESH_LESSONS:
+      return {
+        ...state,
+        lessons: {
+          ...state.lessons,
+          list: action.payload.list,
+          hasMore: action.payload.hasMore,
+          offset: action.payload.list.length,
+          loading: false
         }
       };
 
