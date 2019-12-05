@@ -13,7 +13,7 @@ import { loadMore, downReferesh } from "../../utils";
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof actions;
-interface IParams {}
+interface IParams { }
 type RouteProps = RouteComponentProps<IParams>;
 type Props = StateProps &
   DispatchProps &
@@ -22,9 +22,9 @@ type Props = StateProps &
     currentCategory: string;
     setCurrentCategory: any;
   };
-export interface HomeProps {}
+export interface HomeProps { }
 
-export interface HomeState {}
+export interface HomeState { }
 
 class Home extends React.Component<Props, HomeState> {
   homeContainerRef: any;
@@ -38,7 +38,7 @@ class Home extends React.Component<Props, HomeState> {
   componentDidMount() {
     loadMore(this.homeContainerRef.current, this.props.getLessons);
     downReferesh(this.homeContainerRef.current, this.props.refreshLessons)
-    // this.homeContainerRef.current.addEventListener('scroll', )
+    this.homeContainerRef.current.addEventListener('scroll', () => this.lessonRef.current.forceUpdate())
   }
   render() {
     return (
@@ -54,6 +54,7 @@ class Home extends React.Component<Props, HomeState> {
             sliders={this.props.sliders}
           />
           <HomeLessons
+            homeContainerRef={this.homeContainerRef}
             getLessons={this.props.getLessons}
             lessons={this.props.lessons}
             ref={this.lessonRef}

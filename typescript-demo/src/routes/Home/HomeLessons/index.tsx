@@ -8,9 +8,10 @@ const { Meta } = Card;
 export interface HomeLessonsProps {
   getLessons: any;
   lessons: Lessons;
+  homeContainerRef: any;
 }
 
-export interface HomeLessonsState {}
+export interface HomeLessonsState { }
 
 class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
   // state = { :  }
@@ -20,8 +21,16 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
   }
 
   render() {
+    let start = 0;
+    let rem = parseInt(document.documentElement.style.fontSize);
+    if (this.props.homeContainerRef.current) {
+      let scrollTop = this.props.homeContainerRef.current.scrollTop;
+      if (scrollTop - 4.2 * rem > 0) {
+        start = Math.floor((scrollTop - 4.2 * rem) / (6.5 * rem));
+      }
+    }
     return (
-      <div className="home-lesson">
+      <section className="home-lesson">
         <h2>
           <Icon type="bars" />
           <span>全部课程</span>
@@ -32,11 +41,10 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
           }
           paragraph={{ rows: 8 }}
         >
-          {this.props.lessons.list.map((lesson: Lesson) => (
-            <Link key={lesson._id} to={{ pathname: `/detail/${lesson._id}`, state: lesson }}>
+          {this.props.lessons.list.map((lesson: Lesson, index: number) => (
+            index >= start && index < start + 5 ? <Link key={lesson._id} to={{ pathname: `/detail/${lesson._id}`, state: lesson }}>
               <Card
                 hoverable
-                // style={{ width: 100% }}
                 cover={<img src={lesson.url} />}
               >
                 <Meta
@@ -44,7 +52,7 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
                   description={`价格：${lesson.price}`}
                 />
               </Card>
-            </Link>
+            </Link> : <div key={lesson._id} style={{ height: `${6.5 * rem}px` }}></div>
           ))}
           {this.props.lessons.hasMore ? (
             <Button
@@ -55,10 +63,10 @@ class HomeLessons extends React.Component<HomeLessonsProps, HomeLessonsState> {
               加载更多
             </Button>
           ) : (
-            <p style={{ width: "100%", textAlign: "center" }}>到底了</p>
-          )}
+              <p style={{ width: "100%", textAlign: "center" }}>到底了</p>
+            )}
         </Skeleton>
-      </div>
+      </section >
     );
   }
 }
