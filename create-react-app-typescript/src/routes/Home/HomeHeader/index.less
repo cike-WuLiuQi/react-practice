@@ -1,0 +1,35 @@
+@bg_color: #2a2a2a;
+
+.home-header {
+  height: 1rem;
+  width: 100%;
+  background: @bg_color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  color: #fff;
+  .home-logo {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0.3rem;
+   
+    img {
+      width: 2rem;
+    }
+    i {
+      font-size: 0.5rem;
+      line-height: 0.6rem;
+    }
+  }
+
+  .category {
+    text-align: center;
+    background: @bg_color;
+    font-size: 0.3rem;
+    li {
+      line-height: 0.5rem;
+      border-bottom: 1px solid lighten(@bg_color, 20%);
+      padding: 0.15rem;
+    }
+  }
+}
