@@ -1,0 +1,15 @@
+.home-header {
+  height: 2rem;
+  width: 100%;
+  background: #2a2a2a;
+  /* position: fixed; */
+  /* top: 0;
+  left: 0; */
+  /* display: flex; */
+  /* justify-content: space-between;
+  color: #fff; */
+}
+
+.home-header img {
+  height: 1rem;
+}
