@@ -7,10 +7,13 @@ import * as serviceWorker from "./serviceWorker";
 import Home from "./routes/Home";
 import Mine from "./routes/Mine";
 import Profile from "./routes/Profile";
+import Login from "./routes/Login";
+import Register from "./routes/Register";
 import "minireset.css";
 import store from "./store";
 import history from "./store/history";
 import { ConnectedRouter } from "connected-react-router";
+import Tabs from './components/Tabs'
 
 ReactDOM.render(
   <Provider store={store}>
@@ -19,7 +22,10 @@ ReactDOM.render(
         <Route path="/" exact component={Home} />
         <Route path="/mine" component={Mine} />
         <Route path="/profile" component={Profile} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
       </Switch>
+      <Tabs />
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(
     cors({
-        origin: ["http://localhost:8080", "http://localhost:8081"],
+        origin: ["http://localhost:8080", "http://localhost:8081", "http://localhost:3000"],
         credentials: true,
         allowedHeaders: "Content-Type,x-requested-with",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS"
@@ -106,4 +106,4 @@ app.get('/getLessons/:category', async function (req, res) {
         res.json({ code: 0, data: { list, hasMore: total > offset + limit } });
     }, 1000);
 });
-app.listen(9000);
+app.listen(9001);

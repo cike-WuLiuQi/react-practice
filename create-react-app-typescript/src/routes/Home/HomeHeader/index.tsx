@@ -17,7 +17,10 @@ const transitionStyles = {
   unmounted: { opacity: 0 }
 };
 
-export interface HomeHeaderProps {}
+export interface HomeHeaderProps {
+  setCategory: any;
+  currentCategory: string;
+}
 
 export interface HomeHeaderState {
   in: boolean;
@@ -28,7 +31,11 @@ class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
 
   setCategory = (event: React.MouseEvent<HTMLUListElement>) => {
     let target: EventTarget = event.target;
-    // (target as HTMLUListElement).dataset.type;
+    let type = (target as HTMLUListElement).dataset.type;
+    this.props.setCategory(type);
+    this.setState({
+      in: !this.state.in
+    })
   };
 
   render() {
@@ -51,9 +58,26 @@ class HomeHeader extends React.Component<HomeHeaderProps, HomeHeaderState> {
               }}
               onClick={this.setCategory}
             >
-              <li data-type="all">全部</li>
-              <li data-type="react">react</li>
-              <li data-type="vue">vue</li>
+              <li
+                data-type="all"
+                className={this.props.currentCategory === "all" ? "active" : ""}
+              >
+                全部
+              </li>
+              <li
+                data-type="react"
+                className={
+                  this.props.currentCategory === "react" ? "active" : ""
+                }
+              >
+                react
+              </li>
+              <li
+                data-type="vue"
+                className={this.props.currentCategory === "vue" ? "active" : ""}
+              >
+                vue
+              </li>
             </ul>
           )}
         </Transition>
